@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Agencia de viajes - Clientes</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid bg-light pt-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="m-0 text-primary"></span>AGENCIA</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">HOME</a>
+                        <a href="crear.html" class="nav-item nav-link">Crear cuenta</a>
+                        <a href="editar.html" class="nav-item nav-link">Editar cuenta</a>
+                        <a href="eliminar.html" class="nav-item nav-link">Eliminar cuenta</a>
+                        <div class="nav-item dropdown">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid py-5">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Clientes</h6>
+            <h1>Lista de clientes</h1>
+        </div>
+    </div>
+
+    <div class="container pb-0">
+        <div class="bg-light shadow">
+            <div class="mb-3">
+                <table id="tablaClientes" class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th class="w-15 m-0 text-primary"></span>Rut</th>
+                            <th class="w-20 m-0 text-primary"></span>Nombre</th>
+                            <th class="w-20 m-0 text-primary"></span>Apellido</th>
+                            <th class="w-20 m-0 text-primary"></span>Correo</th>
+                            <th class="w-25 m-0 text-primary"></span>Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaClientes"></tbody>
+                </table>
+                <script>
+                    document.addEventListener("DOMContentLoaded", async () => {
+                        try {
+                            const response = await fetch("http://localhost:5500/cliente");
+                            console.log("Respuesta del servidor:", response);
+                            if (response.ok) {
+                                const data = await response.json();
+                                const cuerpoTablaClientes = document.getElementById("cuerpoTablaClientes");
+                                data.forEach(cliente => {
+                                    const fila = document.createElement("tr");
+                                    const rutColumna = document.createElement("td");
+                                    rutColumna.textContent = cliente.rut;
+                                    fila.appendChild(rutColumna);
+                                    const nombreColumna = document.createElement("td");
+                                    nombreColumna.textContent = cliente.nombre;
+                                    fila.appendChild(nombreColumna);
+                                    const apellidoColumna = document.createElement("td");
+                                    apellidoColumna.textContent = cliente.apellido;
+                                    fila.appendChild(apellidoColumna);
+                                    const correoColumna = document.createElement("td");
+                                    correoColumna.textContent = cliente.correo;
+                                    fila.appendChild(correoColumna);
+                                    const telefonoColumna = document.createElement("td");
+                                    telefonoColumna.textContent = cliente.telefono;
+                                    fila.appendChild(telefonoColumna);
+                                    cuerpoTablaClientes.appendChild(fila);
+                                });
+                            } else {
+                                console.error("Error al obtener la lista de clientes:", response.status, response.statusText);
+                            }
+                        } catch (error) {
+                            console.error("Error de red:", error);
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

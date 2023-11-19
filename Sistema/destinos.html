@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Agencia de vaijes - Destinos</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="index.html" class="navbar-brand">
+                    <h1 class="m-0 text-primary"></span>AGENCIA</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">HOME</a>
+                        <a href="crear.html" class="nav-item nav-link">Crear cuenta</a>
+                        <a href="editar.html" class="nav-item nav-link">Editar cuenta</a>
+                        <a href="eliminar.html" class="nav-item nav-link">Eliminar cuenta</a>
+                        <div class="nav-item dropdown">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+                <h3 class="display-4 text-white text-uppercase">Destinos</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="index.html">Home</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Destinos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-5">
+        <div class="text-center mb-3 pb-3">
+            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destino</h6>
+            <h1>Selecciona Fecha y hora</h1>
+        </div>
+    </div>
+
+    <div class="container-fluid booking mt-4 pb-4">
+        <div class="container pb-5">
+            <div class="bg-light shadow" style="padding: 10px;">
+                <div class="row align-items-center justify-content-center flex-column">
+                    <div class="col-md-10 mb-3">
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-check-label"></label>
+                                    <input type="checkbox" id="idaCheckbox" name="idaCheckbox" class="form-check-input">Ida y vuelta
+                                </div>
+                            </div>
+                            <h5 id="infoViaje"></h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fechaIda" class="form-label">Fecha de Ida</label>
+                                    <input type="date" id="fechaIda" name="fechaIda" class="form-control p-4">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="horaIda" class="form-label">Hora de Ida</label>
+                                    <select id="horaIda" class="custom-select px-4" style="height: 47px;">
+                                        <option value="1">00:30 AM</option>
+                                        <option value="2">12:30 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="seccionVuelta" style="display: none;">
+                            <label> </label>
+                            <label> </label>
+                            <label> </label>
+                            <label> </label>
+                            <h5 id="infoViaje2"></h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="fechaVuelta" class="form-label">Fecha de Vuelta</label>
+                                    <input type="date" id="fechaVuelta" name="fechaVuelta" class="form-control p-4">
+                               </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="horaVuelta" class="form-label">Hora de Vuelta</label>
+                                    <select id="horaVuelta" class="custom-select px-4" style="height: 47px;">
+                                        <option value="1">00:30 AM</option>
+                                        <option value="2">12:30 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="reservarBtn" class="btn btn-primary py-md-3 px-md-5 mt-2">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ciudades = {
+                "1": "Santiago",
+                "2": "Buenos Aires",
+                "3": "Sao Paulo",
+                "4": "Arequipa",
+                "5": "La Paz",
+                "6": "Bogotá"
+            };
+            function convertirValorHora(valor) {
+            if (valor === "1") {
+                return "00:30:00";
+            } else if (valor === "2") {
+                return "12:30:00";
+            } else {
+                return "00:00:00";
+            }
+            }
+            const params = new URLSearchParams(window.location.search);
+            const origenValue = params.get("origen");
+            const destinoValue = params.get("destino");
+            const infoViaje = document.getElementById("infoViaje");
+            if (origenValue && destinoValue) {
+                const origenCiudad = ciudades[origenValue] || "Ciudad desconocida";
+                const destinoCiudad = ciudades[destinoValue] || "Ciudad desconocida";
+                infoViaje.textContent = `${origenCiudad} → ${destinoCiudad}`;
+            }
+            const infoViaje2 = document.getElementById("infoViaje2");
+            if (origenValue && destinoValue) {
+                const origenCiudad = ciudades[origenValue] || "Ciudad desconocida";
+                const destinoCiudad = ciudades[destinoValue] || "Ciudad desconocida";
+                infoViaje2.textContent = `${destinoCiudad} → ${origenCiudad}`;
+            }
+            const idaCheckbox = document.getElementById("idaCheckbox");
+            const seccionVuelta = document.getElementById("seccionVuelta");
+            idaCheckbox.addEventListener("change", function () {
+                seccionVuelta.style.display = idaCheckbox.checked ? "block" : "none";
+            });
+            const fechaIdaInput = document.getElementById("fechaIda");
+            const horaIdaSelect = document.getElementById("horaIda");
+            const fechaVueltaInput = document.getElementById("fechaVuelta");
+            const horaVueltaSelect = document.getElementById("horaVuelta");
+            const reservaBtn = document.getElementById("reservarBtn");
+            
+            reservaBtn.addEventListener("click", async function () {
+                const fechaIda = fechaIdaInput.value;
+                const horaIdaValue = horaIdaSelect.value;
+                const fechaVuelta = fechaVueltaInput.value;
+                const horaVueltaValue = horaVueltaSelect.value;
+
+                const horaIda = convertirValorHora(horaIdaValue);
+                const horaVuelta = convertirValorHora(horaVueltaValue);
+    
+                const vueloExistenteIda = await verificarVueloExistente(fechaIda, origenValue, destinoValue, horaIda);
+const vueloExistenteVuelta = await verificarVueloExistente(fechaVuelta, destinoValue, origenValue, horaVuelta);
+
+if (fechaIda !== "" && !idaCheckbox.checked) {
+    if (vueloExistenteIda !== 0) {
+        const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&idVuelo=${vueloExistenteIda}`;
+        window.location.href = url;
+    } else {
+        const newVueloId = await agregarVuelo(fechaIda, origenValue, destinoValue, horaIda);
+        const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&idVuelo=${newVueloId}`;
+        window.location.href = url;
+    }
+} else if (fechaIda !== "" && idaCheckbox.checked && fechaVuelta !== "") {
+    if (vueloExistenteIda !== 0) {
+        if (vueloExistenteVuelta !== 0) {
+            const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&fechavuelta=${fechaVuelta}&idVuelo=${vueloExistenteIda}&idVueloVuelta=${vueloExistenteVuelta}`;
+            window.location.href = url;
+        } else {
+            const newVueloVuelta = await agregarVuelo(fechaVuelta, destinoValue, origenValue, horaVuelta);
+            const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&fechavuelta=${fechaVuelta}&idVuelo=${vueloExistenteIda}&idVueloVuelta=${newVueloVuelta}`;
+            window.location.href = url;
+        }
+    } else if (vueloExistenteIda == 0){
+        if (vueloExistenteVuelta == 0) {
+            const newVueloIda = await agregarVuelo(fechaIda, origenValue, destinoValue, horaIda);
+            const newVueloVuelta = await agregarVuelo(fechaVuelta, destinoValue, origenValue, horaVuelta);
+            const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&fechavuelta=${fechaVuelta}&idVuelo=${newVueloIda}&idVueloVuelta=${newVueloVuelta}`;
+            window.location.href = url;
+        } else {
+            const newVueloIda = await agregarVuelo(fechaIda, origenValue, destinoValue, horaIda);
+            const url = `pagos.html?origen=${origenValue}&destino=${destinoValue}&fecha=${fechaIda}&fechavuelta=${fechaVuelta}&idVuelo=${vueloExistenteIda}&idVueloVuelta=${newVueloVuelta}`;
+            window.location.href = url;
+
+        }
+    }
+}
+            });
+            fechaIdaInput.min = new Date().toISOString().split("T")[0];
+            async function agregarVuelo(fecha, origen, destino, hora) {
+    console.log('Datos a enviar:', { fecha, ciudad_origen: ciudades[origen], ciudad_destino: ciudades[destino], hora });
+
+    try {
+        const response = await fetch('http://localhost:5500/vuelo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ fecha, ciudad_origen: ciudades[origen], ciudad_destino: ciudades[destino], hora })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
+        if (data.resultado && data.resultado.newVueloId) {
+            return data.resultado.newVueloId;
+        } else {
+            console.error('La respuesta del servidor no tiene la propiedad "resultado.newVueloId".', data);
+        }
+    } catch (error) {
+        console.error('Error al agregar vuelo:', error);
+        console.error('Datos del vuelo:', { fecha, ciudad_origen, ciudad_destino, hora });
+        throw error;
+    }
+}
+            async function verificarVueloExistente(fecha, origen, destino, hora) {
+    try {
+        const queryString = `?fecha=${fecha}&ciudad_origen=${ciudades[origen]}&ciudad_destino=${ciudades[destino]}&hora=${hora}`;
+        const response = await fetch(`http://localhost:5500/vuelo${queryString}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.id_vuelo || 0;
+    } catch (error) {
+        console.error('Error al verificar vuelo existente:', error);
+        return 0;
+    }
+}
+});
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
